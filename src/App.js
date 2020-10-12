@@ -4,10 +4,13 @@ import Pokemon from "./containers/pokemon";
 import PokemonList from "./containers/pokemonList";
 function App() {
 	return (
-		<div className="App">
+		<div className='App'>
+			<nav className="header-nav">
+				<NavLink to={"/"}>Search</NavLink>
+			</nav>
 			<Switch>
-				<Route path="/" exact component={PokemonList} />
-				<Route path="/pokemon/:pokemon" exact component={Pokemon} />
+				<Route path='/' exact component={PokemonList} />
+				<Route path='/pokemon/:pokemon' exact component={Pokemon} />
 				<Redirect to={"/"} />
 			</Switch>
 		</div>
