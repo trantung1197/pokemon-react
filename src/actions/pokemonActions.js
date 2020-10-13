@@ -1,7 +1,7 @@
 import Axios from "axios";
 
-const URL_API = "https://pokeapi.co/api/v2/pokemon?limit=20&offset=";
-const perPage = 20;
+const URL_API = "https://pokeapi.co/api/v2/pokemon/";
+const perPage = 12;
 
 export const getPokemonList = (page) => {
 	const offset = page * perPage - perPage;
@@ -11,9 +11,9 @@ export const getPokemonList = (page) => {
 
 		Axios({
 			method: "GET",
-			url: URL_API + `?limit=20&offset=${offset}`,
+			url: URL_API + `?limit=12&offset=${offset}`,
 		})
-			.then((result) => dispatch(getPokemonListSuccess(result)))
+			.then((result) => dispatch(getPokemonListSuccess(result.data)))
 			.catch((err) => dispatch(getPokemonListFail(err)));
 	};
 };
