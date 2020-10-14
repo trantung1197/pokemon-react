@@ -124,8 +124,6 @@ export default function PokemonCard(props) {
 
 		const { sprites } = pokeData;
 		let linkImg = "./pokeball.svg";
-		console.log(pokeData);
-
 		if (sprites) {
 			if (sprites.other) {
 				linkImg = sprites.other.dream_world.front_default;

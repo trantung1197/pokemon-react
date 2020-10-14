@@ -1,5 +1,5 @@
 const defaultState = {
-	loading: false,
+	loading: true,
 	data: [],
 	errorMsg: "",
 	count: 0

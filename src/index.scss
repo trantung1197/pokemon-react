@@ -24,6 +24,46 @@ body {
 	}
 }
 
+ul.pagination {
+	display: inline-block;
+	padding-left: 0;
+	margin: 20px 0;
+	border-radius: 4px;
+
+	li {
+		display: inline;
+		a {
+			position: relative;
+			float: left;
+			padding: 6px 12px;
+			line-height: 1.42857143;
+			text-decoration: none;
+			color: #337ab7;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			margin-left: -1px;
+		}
+
+		&:hover a {
+			background-color: #f2f2f2;
+		}
+	}
+
+	.active {
+		a {
+			background-color: #337ab7;
+			color: #fff;
+			pointer-events: none;
+		}
+	}
+
+	.disabled {
+		a{
+			cursor: not-allowed;
+		}
+	}
+}
+
 .background-color-normal {
 	background: linear-gradient(180deg, #a4acaf 50%, #a4acaf 50%);
 	background-color: #a4acaf;
@@ -48,23 +88,23 @@ body {
 	color: #212121;
 }
 .background-color-rock {
-  background: linear-gradient(180deg, #a38c21 50%, #a38c21 50%);
-  background-color: #a38c21;
-  color: #fff;
+	background: linear-gradient(180deg, #a38c21 50%, #a38c21 50%);
+	background-color: #a38c21;
+	color: #fff;
 }
 .background-color-bug {
 	background-color: #a8b820;
 	color: #fff;
 }
 .background-color-ghost {
-  background: linear-gradient(180deg, #7b62a3 50%, #7b62a3 50%);
-  background-color: #7b62a3;
-  color: #fff;
+	background: linear-gradient(180deg, #7b62a3 50%, #7b62a3 50%);
+	background-color: #7b62a3;
+	color: #fff;
 }
 .background-color-steel {
-  background: linear-gradient(180deg, #9eb7b8 50%, #9eb7b8 50%);
-  background-color: #9eb7b8;
-  color: #212121;
+	background: linear-gradient(180deg, #9eb7b8 50%, #9eb7b8 50%);
+	background-color: #9eb7b8;
+	color: #212121;
 }
 .background-color-fire {
 	background-color: #f08030;
@@ -106,4 +146,3 @@ body {
 	background-color: #fdb9e9;
 	color: #212121;
 }
-

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getPokemonList } from "../actions/pokemonActions";
+import LoadingPage from "../components/loadingPage";
 import PokemonCard from "../components/pokemonCard";
 import Pokemon from "./pokemon";
 
@@ -28,39 +29,19 @@ const BoxButton = styled.div`
 	justify-content: center;
 `;
 
-const ButtonLoadMore = styled.button`
-	min-width: 120px;
-	background-color: #30a7d7;
-	border: none;
-	border-radius: 6px;
-
-	color: #fff;
-	font-size: 20px;
-
-	padding: 15px 18px;
-	transition: 0.4s ease;
-	cursor: pointer;
-	outline: none;
-
-	&:hover {
-		background-color: #1b82b1;
-	}
-`;
-
 //JSX
 const PokemonList = (props) => {
-	const [listPokemon, setListPokemon] = useState("");
-	const [pageState, setPageState] = useState(1);
 	const [activePage, setActivePage] = useState(1);
 
 	useEffect(() => {
-		props.getListPokemon();
+		console.log(pageLoading);
+		
+		props.getListPokemon(1);
 	}, []);
 
-	const { pokemonList } = props;
+	const { pokemonList, pageLoading } = props;
 
 	const showData = () => {
-		console.log("pokemonList", pokemonList);
 		if (pokemonList) {
 			return pokemonList.map((ele) => {
 				return <PokemonCard key={ele.name} pokeID={ele} />;
@@ -68,25 +49,30 @@ const PokemonList = (props) => {
 		}
 	};
 
-	const handleLoadMore = (page) => {};
-
-	const handlePageChange = (pageNumber) =>{
+	const handlePageChange = (pageNumber) => {
+		props.getListPokemon(pageNumber);
 		setActivePage(pageNumber);
 	};
 
 	return (
-		<Container>
-			<ListWrapper>{showData()}</ListWrapper>
-			<BoxButton>
-				<Pagination
-					activePage={activePage}
-					itemsCountPerPage={10}
-					totalItemsCount={450}
-					pageRangeDisplayed={5}
-					onChange={handlePageChange.bind(this)}
-				/>
-			</BoxButton>
-		</Container>
+		<>
+			{pageLoading ? (
+				<LoadingPage></LoadingPage>
+			) : (
+				<Container>
+					<ListWrapper>{showData()}</ListWrapper>
+					<BoxButton>
+						<Pagination
+							activePage={activePage}
+							itemsCountPerPage={10}
+							totalItemsCount={450}
+							pageRangeDisplayed={5}
+							onChange={handlePageChange.bind(this)}
+						/>
+					</BoxButton>
+				</Container>
+			)}
+		</>
 	);
 };
 
@@ -100,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
 	return {
+		pageLoading: state.pokemonListReducer.loading,
 		pokemonList: state.pokemonListReducer.data,
 	};
 };
