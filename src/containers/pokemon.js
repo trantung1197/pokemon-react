@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getPokemonData } from "../actions/pokemonActions";
 
-export default function Pokemon(props) {
+function Pokemon(props) {
+	console.log("props", props);
 
-    console.log("props", props);
+	useEffect(() => {
+		props.getPokemonData(props.match.params.pokemon);
+	}, []);
 
-    return (
-        <div>
-            Pokemon
-        </div>
-    )
+	return <div>{props.match.params.pokemon}</div>;
 }
+
+const mapStateToProps = (state) => {
+	return {
+		// pokemonData: state.
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getPokemonData: (id) => {
+			dispatch(getPokemonData(id));
+		},
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);

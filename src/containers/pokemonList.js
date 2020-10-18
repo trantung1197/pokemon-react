@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getPokemonList } from "../actions/pokemonActions";
 import LoadingPage from "../components/loadingPage";
 import PokemonCard from "../components/pokemonCard";
-import Pokemon from "./pokemon";
 
 //Style Component
 const Container = styled.section`
@@ -32,14 +30,17 @@ const BoxButton = styled.div`
 //JSX
 const PokemonList = (props) => {
 	const [activePage, setActivePage] = useState(1);
+	const [isLoading, setISLoading] = useState(true);
 
 	useEffect(() => {
-		console.log(pageLoading);
-		
 		props.getListPokemon(1);
+
+		setTimeout(() => {
+			setISLoading(false);
+		}, 2000);
 	}, []);
 
-	const { pokemonList, pageLoading } = props;
+	const { pokemonList } = props;
 
 	const showData = () => {
 		if (pokemonList) {
@@ -56,7 +57,7 @@ const PokemonList = (props) => {
 
 	return (
 		<>
-			{pageLoading ? (
+			{isLoading ? (
 				<LoadingPage></LoadingPage>
 			) : (
 				<Container>
@@ -86,7 +87,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
 	return {
-		pageLoading: state.pokemonListReducer.loading,
 		pokemonList: state.pokemonListReducer.data,
 	};
 };
