@@ -38,8 +38,8 @@ export const getPokemonData = (id) => {
 			method: "GET",
 			url: URL_API + id,
 		})
-			.then((result) => console.log(result))
-			.catch((err) => console.log(err));
+			.then((result) => dispatch(getPokemonDataSuccess(result.data)))
+			.catch((err) => dispatch(getPokemonDataFail(err)));
 	};
 };
 
@@ -47,8 +47,8 @@ const getPokemonDataRequest = () => {
 	return { type: "POKEMON_DATA_LOADING" };
 };
 const getPokemonDataSuccess = (payload) => {
-	return { type: "POKEMON_DATA_SUCCESS" };
+	return { type: "POKEMON_DATA_SUCCESS", payload };
 };
 const getPokemonDataFail = (err) => {
-	return { type: "POKEMON_DATA_FAIL" };
+	return { type: "POKEMON_DATA_FAIL", err };
 };
